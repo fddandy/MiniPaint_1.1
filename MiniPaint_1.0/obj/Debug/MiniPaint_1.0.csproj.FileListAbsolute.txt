@@ -1,0 +1,10 @@
+C:\Users\glinj\source\repos\MiniPaint_1.0\MiniPaint_1.0\bin\Debug\MiniPaint_1.0.exe.config
+C:\Users\glinj\source\repos\MiniPaint_1.0\MiniPaint_1.0\bin\Debug\MiniPaint_1.0.exe
+C:\Users\glinj\source\repos\MiniPaint_1.0\MiniPaint_1.0\bin\Debug\MiniPaint_1.0.pdb
+C:\Users\glinj\source\repos\MiniPaint_1.0\MiniPaint_1.0\obj\Debug\MiniPaint_1.0.csprojAssemblyReference.cache
+C:\Users\glinj\source\repos\MiniPaint_1.0\MiniPaint_1.0\obj\Debug\MiniPaint_1._0.Form1.resources
+C:\Users\glinj\source\repos\MiniPaint_1.0\MiniPaint_1.0\obj\Debug\MiniPaint_1._0.Properties.Resources.resources
+C:\Users\glinj\source\repos\MiniPaint_1.0\MiniPaint_1.0\obj\Debug\MiniPaint_1.0.csproj.GenerateResource.cache
+C:\Users\glinj\source\repos\MiniPaint_1.0\MiniPaint_1.0\obj\Debug\MiniPaint_1.0.csproj.CoreCompileInputs.cache
+C:\Users\glinj\source\repos\MiniPaint_1.0\MiniPaint_1.0\obj\Debug\MiniPaint_1.0.exe
+C:\Users\glinj\source\repos\MiniPaint_1.0\MiniPaint_1.0\obj\Debug\MiniPaint_1.0.pdb
