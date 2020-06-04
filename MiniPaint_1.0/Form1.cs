@@ -17,13 +17,39 @@ namespace MiniPaint_1._0
         Graphics graphics;
         Pen myPen;
         Point tempPoint;
+        SolidBrush solidBrush;
+        private string currentFileName = "";
         public Form1()
         {
             InitializeComponent();
             openFileDialog.Filter = saveFileDialog.Filter =  "Grafika BMP|*.bmp|Grafika PNG|*.png|Grafika JPEG|*.jpg";
             
-            myPen = new Pen(Color.Purple, 8);
+            myPen = new Pen(button1.BackColor, (float)numericUpDown1.Value);
             myPen.EndCap = myPen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
+            nowyToolStripMenuItem_Click(null, null);
+            solidBrush = new SolidBrush(Color.Aquamarine);
+            setFormText();
+        }
+
+        private void setFormText()
+        {
+            if(currentFileName == "")
+            {
+                Text = "Nowy";
+            }
+            else
+            {
+                Text = Path.GetFileNameWithoutExtension(currentFileName);
+            }
+        }
+
+        private void nowyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            pictureBox.Image = new Bitmap(600, 800);
+            graphics = Graphics.FromImage(pictureBox.Image);
+            graphics.Clear(Color.White);
+            currentFileName = "";
+            setFormText();
         }
 
         private void otworzToolStripMenuItem_Click(object sender, EventArgs e)
@@ -34,6 +60,8 @@ namespace MiniPaint_1._0
                 
                 pictureBox.Image = Image.FromFile(openFileDialog.FileName);
                 graphics = Graphics.FromImage(pictureBox.Image);
+                currentFileName = openFileDialog.FileName;
+                setFormText();
             }
         }
         //zapis obrazku
@@ -44,6 +72,7 @@ namespace MiniPaint_1._0
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
+                currentFileName = saveFileDialog.FileName;
                 switch (extension)
                 {
 
@@ -63,6 +92,7 @@ namespace MiniPaint_1._0
 
                pictureBox.Image.Save(saveFileDialog.FileName, imageFormat);
             }
+            setFormText();
         }
 
         private void pictureBox_MouseDown(object sender, MouseEventArgs e)
@@ -77,16 +107,91 @@ namespace MiniPaint_1._0
         {
             if (e.Button == MouseButtons.Left)
             {
-                // graphics.DrawEllipse(new Pen(Color.LavenderBlush, 6), e.X, e.Y, 20, 20);
-                graphics.DrawLine(myPen, tempPoint, e.Location);
-                pictureBox.Refresh();
+                if(radioButtonCurve.Checked)
+                {
+                    // graphics.DrawEllipse(new Pen(Color.LavenderBlush, 6), e.X, e.Y, 20, 20);
+                    graphics.DrawLine(myPen, tempPoint, e.Location);
+                    pictureBox.Refresh();
+                    tempPoint = e.Location;
+                }
             }
-            tempPoint = e.Location;
+            
         }
 
         private void pictureBox_MouseUp(object sender, MouseEventArgs e)
         {
+            if (e.Button == MouseButtons.Left)
+            {
+                if (radioButtonCurve.Checked)
+                {
+                    // graphics.DrawEllipse(new Pen(Color.LavenderBlush, 6), e.X, e.Y, 20, 20);
+                    graphics.DrawLine(myPen, tempPoint, e.Location);
+                   
+                   // tempPoint = e.Location; zbedny bo to jest ostatnia faza cyklu rysowania, wznosimy myszke do gory
+                }
+                else if(radioButtonLine.Checked)
+                {
+                    graphics.DrawLine(myPen, tempPoint, e.Location);
+                }
+                else if(radioButtonRectangle.Checked)
+                {
+                    graphics.FillRectangle(solidBrush, Math.Min(tempPoint.X, e.X),
+                                                  Math.Min(tempPoint.Y, e.Y),
+                                                  Math.Abs(tempPoint.X - e.X),
+                                                  Math.Abs(tempPoint.Y - e.Y));
 
+                    graphics.DrawRectangle(myPen, Math.Min(tempPoint.X, e.X), 
+                                                  Math.Min(tempPoint.Y, e.Y), 
+                                                  Math.Abs(tempPoint.X - e.X),
+                                                  Math.Abs(tempPoint.Y - e.Y));
+                }
+                else if(radioButtonElipse.Checked)
+                {
+                   graphics.FillEllipse(solidBrush, Math.Min(tempPoint.X, e.X),
+                                                 Math.Min(tempPoint.Y, e.Y),
+                                                 Math.Abs(tempPoint.X - e.X),
+                                                 Math.Abs(tempPoint.Y - e.Y));
+
+                    graphics.DrawEllipse(myPen, Math.Min(tempPoint.X, e.X),
+                                                 Math.Min(tempPoint.Y, e.Y),
+                                                 Math.Abs(tempPoint.X - e.X),
+                                                 Math.Abs(tempPoint.Y - e.Y));
+                }
+
+                    pictureBox.Refresh();
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            myPen.Width = (float) numericUpDown1.Value;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if(colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                button1.BackColor = colorDialog.Color;
+                myPen.Color = colorDialog.Color;
+            }
+        }
+
+        private void zapiszToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (currentFileName == "")
+            {
+                zapiszJakoToolStripMenuItem_Click(null, null);
+            }
+            else
+            {
+                pictureBox.Image.Save(currentFileName);
+            }
+            setFormText();
         }
     }
 }
