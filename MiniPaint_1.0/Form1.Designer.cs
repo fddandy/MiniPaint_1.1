@@ -36,8 +36,12 @@
             this.nowyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.otworzToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zapiszJakoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zapiszToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.groupBoxFillIn = new System.Windows.Forms.GroupBox();
+            this.buttonFillIn = new System.Windows.Forms.Button();
+            this.checkBoxFillIn = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.radioButtonElipse = new System.Windows.Forms.RadioButton();
             this.radioButtonRectangle = new System.Windows.Forms.RadioButton();
@@ -49,11 +53,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
-            this.zapiszToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.groupBoxFillIn.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -100,7 +104,7 @@
             // nowyToolStripMenuItem
             // 
             this.nowyToolStripMenuItem.Name = "nowyToolStripMenuItem";
-            this.nowyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.nowyToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.nowyToolStripMenuItem.Text = "Nowy";
             this.nowyToolStripMenuItem.Click += new System.EventHandler(this.nowyToolStripMenuItem_Click);
             // 
@@ -117,6 +121,13 @@
             this.zapiszJakoToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.zapiszJakoToolStripMenuItem.Text = "Zapisz jako";
             this.zapiszJakoToolStripMenuItem.Click += new System.EventHandler(this.zapiszJakoToolStripMenuItem_Click);
+            // 
+            // zapiszToolStripMenuItem
+            // 
+            this.zapiszToolStripMenuItem.Name = "zapiszToolStripMenuItem";
+            this.zapiszToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.zapiszToolStripMenuItem.Text = "Zapisz";
+            this.zapiszToolStripMenuItem.Click += new System.EventHandler(this.zapiszToolStripMenuItem_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -135,6 +146,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.groupBoxFillIn);
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -142,6 +154,37 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(159, 420);
             this.panel1.TabIndex = 1;
+            // 
+            // groupBoxFillIn
+            // 
+            this.groupBoxFillIn.Controls.Add(this.buttonFillIn);
+            this.groupBoxFillIn.Controls.Add(this.checkBoxFillIn);
+            this.groupBoxFillIn.Location = new System.Drawing.Point(4, 223);
+            this.groupBoxFillIn.Name = "groupBoxFillIn";
+            this.groupBoxFillIn.Size = new System.Drawing.Size(152, 100);
+            this.groupBoxFillIn.TabIndex = 2;
+            this.groupBoxFillIn.TabStop = false;
+            this.groupBoxFillIn.Text = "Wypelnienie";
+            // 
+            // buttonFillIn
+            // 
+            this.buttonFillIn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.buttonFillIn.Location = new System.Drawing.Point(54, 20);
+            this.buttonFillIn.Name = "buttonFillIn";
+            this.buttonFillIn.Size = new System.Drawing.Size(75, 17);
+            this.buttonFillIn.TabIndex = 1;
+            this.buttonFillIn.UseVisualStyleBackColor = false;
+            this.buttonFillIn.Click += new System.EventHandler(this.buttonFillIn_Click);
+            // 
+            // checkBoxFillIn
+            // 
+            this.checkBoxFillIn.AutoSize = true;
+            this.checkBoxFillIn.Location = new System.Drawing.Point(3, 20);
+            this.checkBoxFillIn.Name = "checkBoxFillIn";
+            this.checkBoxFillIn.Size = new System.Drawing.Size(45, 17);
+            this.checkBoxFillIn.TabIndex = 0;
+            this.checkBoxFillIn.Text = "Tak";
+            this.checkBoxFillIn.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
@@ -263,13 +306,6 @@
             0});
             this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
-            // zapiszToolStripMenuItem
-            // 
-            this.zapiszToolStripMenuItem.Name = "zapiszToolStripMenuItem";
-            this.zapiszToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.zapiszToolStripMenuItem.Text = "Zapisz";
-            this.zapiszToolStripMenuItem.Click += new System.EventHandler(this.zapiszToolStripMenuItem_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -287,6 +323,8 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.groupBoxFillIn.ResumeLayout(false);
+            this.groupBoxFillIn.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -321,6 +359,9 @@
         private System.Windows.Forms.RadioButton radioButtonLine;
         private System.Windows.Forms.RadioButton radioButtonCurve;
         private System.Windows.Forms.ToolStripMenuItem zapiszToolStripMenuItem;
+        private System.Windows.Forms.GroupBox groupBoxFillIn;
+        private System.Windows.Forms.Button buttonFillIn;
+        private System.Windows.Forms.CheckBox checkBoxFillIn;
     }
 }
 

@@ -16,9 +16,11 @@ namespace MiniPaint_1._0
     {
         Graphics graphics;
         Pen myPen;
+        SolidBrush sbFill;
         Point tempPoint;
         SolidBrush solidBrush;
         private string currentFileName = "";
+        //Bitmap bmpA;
         public Form1()
         {
             InitializeComponent();
@@ -28,6 +30,8 @@ namespace MiniPaint_1._0
             myPen.EndCap = myPen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
             nowyToolStripMenuItem_Click(null, null);
             solidBrush = new SolidBrush(Color.Aquamarine);
+            sbFill = new SolidBrush(Color.Indigo);
+            
             setFormText();
         }
 
@@ -47,7 +51,7 @@ namespace MiniPaint_1._0
         {
             pictureBox.Image = new Bitmap(600, 800);
             graphics = Graphics.FromImage(pictureBox.Image);
-            graphics.Clear(Color.White);
+            graphics.Clear(Color.Transparent);
             currentFileName = "";
             setFormText();
         }
@@ -135,11 +139,17 @@ namespace MiniPaint_1._0
                 }
                 else if(radioButtonRectangle.Checked)
                 {
-                    graphics.FillRectangle(solidBrush, Math.Min(tempPoint.X, e.X),
-                                                  Math.Min(tempPoint.Y, e.Y),
-                                                  Math.Abs(tempPoint.X - e.X),
-                                                  Math.Abs(tempPoint.Y - e.Y));
+                   // bmpA = new Bitmap(600, 800);
+                  //  Graphics g = Graphics.FromImage(bmpA);
+                   if(checkBoxFillIn.Checked)
+                    {
 
+                        graphics.FillRectangle(sbFill, Math.Min(tempPoint.X, e.X),
+                                                 Math.Min(tempPoint.Y, e.Y),
+                                                 Math.Abs(tempPoint.X - e.X),
+                                                 Math.Abs(tempPoint.Y - e.Y));
+                    }
+                   
                     graphics.DrawRectangle(myPen, Math.Min(tempPoint.X, e.X), 
                                                   Math.Min(tempPoint.Y, e.Y), 
                                                   Math.Abs(tempPoint.X - e.X),
@@ -147,11 +157,14 @@ namespace MiniPaint_1._0
                 }
                 else if(radioButtonElipse.Checked)
                 {
-                   graphics.FillEllipse(solidBrush, Math.Min(tempPoint.X, e.X),
-                                                 Math.Min(tempPoint.Y, e.Y),
-                                                 Math.Abs(tempPoint.X - e.X),
-                                                 Math.Abs(tempPoint.Y - e.Y));
-
+                    if (checkBoxFillIn.Checked)
+                    {
+                        graphics.FillEllipse(sbFill, Math.Min(tempPoint.X, e.X),
+                                                Math.Min(tempPoint.Y, e.Y),
+                                                Math.Abs(tempPoint.X - e.X),
+                                                Math.Abs(tempPoint.Y - e.Y));
+                    }
+                   
                     graphics.DrawEllipse(myPen, Math.Min(tempPoint.X, e.X),
                                                  Math.Min(tempPoint.Y, e.Y),
                                                  Math.Abs(tempPoint.X - e.X),
@@ -192,6 +205,16 @@ namespace MiniPaint_1._0
                 pictureBox.Image.Save(currentFileName);
             }
             setFormText();
+        }
+
+       
+        private void buttonFillIn_Click(object sender, EventArgs e)
+        {
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                buttonFillIn.BackColor = colorDialog.Color;
+                sbFill.Color = colorDialog.Color;
+            }
         }
     }
 }
